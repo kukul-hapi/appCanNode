@@ -1,0 +1,33 @@
+
+// This is a buffering parser, not quite as nice as the multipart one.
+// If I find time I'll rewrite this to be fully streaming as well
+var querystring = require('querystring');
+
+function QuerystringParser() {
+    this.buffer = '';
+};
+exports.QuerystringParser = QuerystringParser;
+
+QuerystringParser.prototype.write = function (buffer) {
+    this.buffer += buffer.toString('ascii');
+    return buffer.length;
+};
+
+QuerystringParser.prototype.end = function () {
+    var fields = querystring.parse(this.buffer);
+    for (var field in fields) {
+        this.onField(field, fields[field]);
+    }
+    this.buffer = '';
+
+    this.onEnd();
+};
+
+QuerystringParser.prototype.cancel = function (cb) {
+    this.buffer = '';
+};     /*!
+ * superagent
+ * Copyright (c) 2011 TJ Holowaychuk <tj@vision-media.ca>
+ * MIT Licensed
+ */
+
