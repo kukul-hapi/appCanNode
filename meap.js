@@ -62,7 +62,7 @@ process.argv.forEach(function (val, index, array) {
     }
 });
 try {
-    var RM = require("./meap_rm");
+    var RM = require("meap_rm");
     exports.ROBOT_MANAGER = RM.ROBOT_MANAGER;
 } catch (e) {
     //LOG("[MEAP RM require error]:",e);
@@ -70,7 +70,7 @@ try {
 }
 
 try {
-    var IM = require("./meap_im");
+    var IM = require("meap_im");
     exports.AJAX = IM.AJAX;
     exports.WEBRW = IM.WEBRW;
     exports.SOAP = IM.SOAP;
